@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobMail Simulation</title>
+  <link rel="stylesheet" href="css/email.css" />
+</head>
+<body>
+
+  <!-- ✅ CLOSE BUTTON (NEW) -->
+  <button onclick="goBack()" class="close-app-btn">✕</button>
+
+  <div class="app-shell">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <img src="image/logo1.png" alt="Logo" class="brand-logo" />
+      </div>
+
+      <div class="topbar-center">
+        <div class="searchbar">
+          <span class="search-icon">⌕</span>
+          <input type="text" id="search-input" placeholder="Search mail" />
+          <button class="icon-btn search-filter-btn">☰</button>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="hud-pill">
+          <span class="hud-label">Score</span>
+          <span class="hud-value" id="score">0</span>
+        </div>
+        <div class="hud-pill">
+          <span class="hud-label">Mistakes</span>
+          <span class="hud-value" id="mistakes">0</span>
+        </div>
+        <div class="avatar">JM</div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="workspace">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar">
+        <button class="compose-btn">
+          <span class="compose-plus">＋</span>
+          <span>Compose</span>
+        </button>
+
+        <nav class="sidebar-nav">
+          <button class="nav-item active">
+            <span class="nav-icon">📥</span>
+            <span class="nav-text">Inbox</span>
+            <span class="nav-count" id="inbox-count">0</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-icon">⭐</span>
+            <span class="nav-text">Starred</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-icon">🕒</span>
+            <span class="nav-text">Snoozed</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-icon">➤</span>
+            <span class="nav-text">Sent</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-icon">📝</span>
+            <span class="nav-text">Drafts</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-icon">⋯</span>
+            <span class="nav-text">More</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-section">
+          <div class="section-header">
+            <span>Labels</span>
+          </div>
+
+          <div class="label-item"><span class="label-dot yellow"></span>Important</div>
+          <div class="label-item"><span class="label-dot blue"></span>HR</div>
+          <div class="label-item"><span class="label-dot red"></span>IT Support</div>
+          <div class="label-item"><span class="label-dot green"></span>Operations</div>
+          <div class="label-item"><span class="label-dot purple"></span>Security</div>
+        </div>
+
+        <div class="storage-card">
+          <div class="storage-title">Simulation Mode</div>
+          <div class="storage-subtitle">Stay Alert. Think Before You Click.</div>
+          <div class="storage-bar">
+            <div class="storage-bar-fill" id="progress-bar"></div>
+          </div>
+          <div class="storage-meta">
+            <span id="progress-text">0 of 0 reviewed</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER PANEL -->
+      <section class="mail-list-panel">
+        <div class="mail-list-toolbar">
+          <div class="toolbar-left">
+            <label class="checkbox-wrap">
+              <input type="checkbox" disabled />
+              <span></span>
+            </label>
+            <button class="toolbar-btn" disabled>↻</button>
+            <button class="toolbar-btn" disabled>⋮</button>
+          </div>
+
+          <div class="toolbar-tabs">
+            <button class="tab active">Primary</button>
+            <button class="tab">Promotions</button>
+            <button class="tab">Updates</button>
+          </div>
+        </div>
+
+        <div class="mail-list" id="inbox-list"></div>
+
+        <div class="mail-list-footer">
+          <div class="mail-usage">
+            <span id="mail-usage-text">0 reviewed</span>
+          </div>
+          <div class="mail-page-meta" id="mail-page-meta">1 of 1</div>
+        </div>
+      </section>
+
+      <!-- RIGHT PANEL -->
+      <section class="viewer-panel">
+        <div class="viewer-toolbar">
+          <div class="viewer-toolbar-left">
+            <button class="toolbar-icon">←</button>
+            <button class="toolbar-icon">ⓘ</button>
+            <button class="toolbar-icon">🗑</button>
+            <button class="toolbar-icon">✉</button>
+            <button class="toolbar-icon">⏰</button>
+            <button class="toolbar-icon">🏷</button>
+            <button class="toolbar-icon">⋮</button>
+          </div>
+
+          <div class="viewer-toolbar-right">
+            <span id="viewer-position">0 of 0</span>
+          </div>
+        </div>
+
+        <div class="viewer-content">
+          <div class="message-title-row">
+            <h1 id="email-subject" class="message-subject">Select an email</h1>
+            <span class="message-tag" id="message-tag">Inbox</span>
+          </div>
+
+          <div class="message-meta-row">
+            <div class="sender-avatar" id="sender-avatar">J</div>
+
+            <div class="sender-meta">
+              <div class="sender-main-line">
+                <span id="sender-name" class="sender-name">JobMail Simulation</span>
+                <span id="email-sender" class="sender-email">&lt;simulation@jobmail.local&gt;</span>
+              </div>
+              <div class="sender-sub-line">
+                <span>to me</span>
+              </div>
+            </div>
+
+            <div class="message-time-wrap">
+              <span id="message-time" class="message-time">—</span>
+            </div>
+          </div>
+
+          <div id="email-body" class="message-body">
+            Please select an email from the inbox to begin the simulation.
+          </div>
+        </div>
+
+        <div class="decision-panel">
+          <button id="btn-legit" class="decision-btn legit-btn">✔ Legitimate</button>
+          <button id="btn-phish" class="decision-btn phish-btn">⚠ Report Phishing</button>
+        </div>
+
+        <div class="feedback-panel" id="feedback">
+          Open an email and decide whether it is legitimate or phishing.
+        </div>
+
+        <div class="viewer-footer">
+          <button id="btn-next" class="next-btn">Next Email</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+
+  <!-- ✅ BACK TO DESKTOP -->
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

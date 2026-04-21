@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Range VM</title>
+  <link rel="stylesheet" href="css/email.css" />
+</head>
+<body>
+  <!-- LOGIN SCREEN -->
+  <section id="login-screen" class="login-screen">
+    <div class="login-overlay"></div>
+
+    <div class="login-card">
+      <div class="login-logo-wrap">
+        <img src="image/logo1.png" alt="JobMail Logo" class="login-logo" />
+      </div>
+
+      <h1 class="login-title">Bounty Cyber Range</h1>
+      <p class="login-subtitle">Training Environment</p>
+
+      <div class="login-user">
+        <div class="login-avatar">JM</div>
+        <div class="login-user-meta">
+          <div class="login-username">Job Matthew</div>
+          <div class="login-role">Simulation User</div>
+        </div>
+      </div>
+
+      <button id="enter-vm-btn" class="enter-vm-btn">Enter Desktop</button>
+    </div>
+
+    <div class="login-footer">
+      <span>Training VM</span>
+      <span>•</span>
+      <span>Phishing Awareness Lab</span>
+    </div>
+  </section>
+
+  <!-- DESKTOP -->
+  <section id="desktop-screen" class="desktop-screen hidden">
+    <div class="desktop-wallpaper">
+      <div class="desktop-gradient"></div>
+    </div>
+
+    <div class="desktop-icons">
+      <button class="desktop-icon" data-app="jobmail">
+        <img src="image/logo1.png" alt="JobMail" class="desktop-icon-img" />
+        <span>JobMail</span>
+      </button>
+
+      <button class="desktop-icon" data-app="browser">
+        <div class="desktop-icon-emoji">🌐</div>
+        <span>Browser</span>
+      </button>
+
+      <button class="desktop-icon" data-app="explorer">
+        <div class="desktop-icon-emoji">📁</div>
+        <span>Files</span>
+      </button>
+    </div>
+
+    <!-- JOBMAIL WINDOW -->
+    <div id="window-jobmail" class="app-window hidden">
+      <div class="window-bar">
+        <div class="window-bar-left">
+          <img src="image/logo1.png" alt="JobMail" class="window-app-logo" />
+          <span class="window-title">JobMail</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn minimize-btn" data-action="minimize" data-target="window-jobmail">—</button>
+          <button class="win-btn maximize-btn" data-action="maximize" data-target="window-jobmail">▢</button>
+          <button class="win-btn close-btn" data-action="close" data-target="window-jobmail">✕</button>
+        </div>
+      </div>
+
+      <div class="window-content">
+        <div class="jobmail-shell">
+          <!-- TOPBAR -->
+          <header class="jobmail-topbar">
+            <div class="jobmail-topbar-left">
+              <img src="image/logo1.png" alt="Logo" class="jobmail-logo-only" />
+            </div>
+
+            <div class="jobmail-topbar-center">
+              <div class="jobmail-searchbar">
+                <span class="jobmail-search-icon">⌕</span>
+                <input type="text" id="search-input" placeholder="Search mail" />
+                <span class="jobmail-filter-icon">☰</span>
+              </div>
+            </div>
+
+            <div class="jobmail-topbar-right">
+              <div class="hud-pill">
+                <span class="hud-label">Score</span>
+                <span class="hud-value success" id="score">0</span>
+              </div>
+              <div class="hud-pill">
+                <span class="hud-label">Mistakes</span>
+                <span class="hud-value danger" id="mistakes">0</span>
+              </div>
+              <div class="avatar">JM</div>
+            </div>
+          </header>
+
+          <!-- MAIN -->
+          <main class="jobmail-workspace">
+            <!-- SIDEBAR -->
+            <aside class="jobmail-sidebar">
+              <button class="compose-btn" type="button">
+                <span class="compose-plus">＋</span>
+                <span>Compose</span>
+              </button>
+
+              <nav class="sidebar-nav">
+                <button class="nav-item active" type="button">
+                  <span class="nav-icon">📥</span>
+                  <span class="nav-text">Inbox</span>
+                  <span class="nav-count" id="inbox-count">0</span>
+                </button>
+                <button class="nav-item" type="button">
+                  <span class="nav-icon">⭐</span>
+                  <span class="nav-text">Starred</span>
+                </button>
+                <button class="nav-item" type="button">
+                  <span class="nav-icon">🕒</span>
+                  <span class="nav-text">Snoozed</span>
+                </button>
+                <button class="nav-item" type="button">
+                  <span class="nav-icon">➤</span>
+                  <span class="nav-text">Sent</span>
+                </button>
+                <button class="nav-item" type="button">
+                  <span class="nav-icon">📝</span>
+                  <span class="nav-text">Drafts</span>
+                </button>
+              </nav>
+
+              <div class="sidebar-section">
+                <div class="section-header">
+                  <span>Labels</span>
+                </div>
+                <div class="label-item"><span class="label-dot yellow"></span>Important</div>
+                <div class="label-item"><span class="label-dot blue"></span>HR</div>
+                <div class="label-item"><span class="label-dot red"></span>IT Support</div>
+                <div class="label-item"><span class="label-dot green"></span>Operations</div>
+                <div class="label-item"><span class="label-dot purple"></span>Security</div>
+              </div>
+
+              <div class="storage-card">
+                <div class="storage-title">Simulation Mode</div>
+                <div class="storage-subtitle">Stay Alert. Think Before You Click.</div>
+                <div class="storage-bar">
+                  <div class="storage-bar-fill" id="progress-bar"></div>
+                </div>
+                <div class="storage-meta" id="progress-text">0 of 0 reviewed</div>
+              </div>
+            </aside>
+
+            <!-- MAIL LIST -->
+            <section class="mail-list-panel">
+              <div class="mail-list-toolbar">
+                <div class="toolbar-left">
+                  <div class="toolbar-fake-box"></div>
+                  <button class="toolbar-btn" type="button">↻</button>
+                  <button class="toolbar-btn" type="button">⋮</button>
+                </div>
+
+                <div class="toolbar-tabs">
+                  <button class="tab active" type="button">Primary</button>
+                  <button class="tab" type="button">Promotions</button>
+                  <button class="tab" type="button">Updates</button>
+                </div>
+              </div>
+
+              <div class="mail-list" id="inbox-list"></div>
+
+              <div class="mail-list-footer">
+                <div id="mail-usage-text">0 reviewed</div>
+                <div id="mail-page-meta">0 visible</div>
+              </div>
+            </section>
+
+            <!-- VIEWER -->
+            <section class="viewer-panel">
+              <div class="viewer-toolbar">
+                <div class="viewer-toolbar-left">
+                  <button class="toolbar-icon" type="button">←</button>
+                  <button class="toolbar-icon" type="button">ⓘ</button>
+                  <button class="toolbar-icon" type="button">🗑</button>
+                  <button class="toolbar-icon" type="button">✉</button>
+                  <button class="toolbar-icon" type="button">⏰</button>
+                  <button class="toolbar-icon" type="button">🏷</button>
+                </div>
+                <div class="viewer-toolbar-right">
+                  <span id="viewer-position">0 of 0</span>
+                </div>
+              </div>
+
+              <div class="viewer-content">
+                <div class="message-title-row">
+                  <h1 id="email-subject" class="message-subject">Select an email</h1>
+                  <span class="message-tag" id="message-tag">Inbox</span>
+                </div>
+
+                <div class="message-meta-row">
+                  <div class="sender-avatar" id="sender-avatar">J</div>
+
+                  <div class="sender-meta">
+                    <div class="sender-main-line">
+                      <span id="sender-name" class="sender-name">JobMail Simulation</span>
+                      <span id="email-sender" class="sender-email">&lt;simulation@jobmail.local&gt;</span>
+                    </div>
+                    <div class="sender-sub-line">to me</div>
+                  </div>
+
+                  <div class="message-time-wrap">
+                    <span id="message-time" class="message-time">—</span>
+                  </div>
+                </div>
+
+                <div id="email-body" class="message-body">
+                  Open an email and decide whether it is legitimate or phishing.
+                </div>
+              </div>
+
+              <div class="decision-panel">
+                <button id="btn-legit" class="decision-btn legit-btn" type="button">✔ Legitimate</button>
+                <button id="btn-phish" class="decision-btn phish-btn" type="button">⚠ Report Phishing</button>
+              </div>
+
+              <div class="feedback-panel" id="feedback">
+                Open an email and decide whether it is legitimate or phishing.
+              </div>
+
+              <div class="viewer-footer">
+                <button id="btn-next" class="next-btn" type="button">Next Email</button>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- BROWSER WINDOW -->
+    <div id="window-browser" class="app-window hidden">
+      <div class="window-bar">
+        <div class="window-bar-left">
+          <span class="window-app-emoji">🌐</span>
+          <span class="window-title">SecureBrowse</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn minimize-btn" data-action="minimize" data-target="window-browser">—</button>
+          <button class="win-btn maximize-btn" data-action="maximize" data-target="window-browser">▢</button>
+          <button class="win-btn close-btn" data-action="close" data-target="window-browser">✕</button>
+        </div>
+      </div>
+
+      <div class="window-content browser-app">
+        <div class="browser-toolbar">
+          <div class="browser-nav-btns">
+            <button type="button">←</button>
+            <button type="button">→</button>
+            <button type="button">↻</button>
+          </div>
+          <div class="browser-address-bar">https://account-security-verification.example-login.net</div>
+        </div>
+
+        <div class="browser-page">
+          <div class="browser-phish-card">
+            <div class="fake-site-logo">Microsoft 365</div>
+            <h2>Sign in to continue</h2>
+            <p>Your session expired. Please sign in again to continue securely.</p>
+
+            <label>Email</label>
+            <input type="text" value="employee@bountyfresh.com.ph" readonly />
+
+            <label>Password</label>
+            <input type="password" value="password123" readonly />
+
+            <button class="browser-signin-btn" type="button">Sign In</button>
+
+            <div class="browser-warning-note">
+              This browser window is a simulated phishing landing page for awareness training.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPLORER WINDOW -->
+    <div id="window-explorer" class="app-window hidden">
+      <div class="window-bar">
+        <div class="window-bar-left">
+          <span class="window-app-emoji">📁</span>
+          <span class="window-title">File Explorer</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn minimize-btn" data-action="minimize" data-target="window-explorer">—</button>
+          <button class="win-btn maximize-btn" data-action="maximize" data-target="window-explorer">▢</button>
+          <button class="win-btn close-btn" data-action="close" data-target="window-explorer">✕</button>
+        </div>
+      </div>
+
+      <div class="window-content explorer-app">
+        <div class="explorer-sidebar">
+          <div class="explorer-side-title">Quick Access</div>
+          <div class="explorer-side-item active">Desktop</div>
+          <div class="explorer-side-item">Documents</div>
+          <div class="explorer-side-item">Downloads</div>
+          <div class="explorer-side-item">Shared Drive</div>
+          <div class="explorer-side-item">Archives</div>
+        </div>
+
+        <div class="explorer-main">
+          <div class="explorer-header">Desktop</div>
+
+          <div class="explorer-grid">
+            <div class="explorer-file danger">
+              <div class="file-icon">📄</div>
+              <div class="file-name">Payroll_Adjustment_2026.exe</div>
+            </div>
+
+            <div class="explorer-file">
+              <div class="file-icon">📄</div>
+              <div class="file-name">Weekly_Meeting_Agenda.pdf</div>
+            </div>
+
+            <div class="explorer-file danger">
+              <div class="file-icon">📦</div>
+              <div class="file-name">Updated_HR_Form.zip</div>
+            </div>
+
+            <div class="explorer-file">
+              <div class="file-icon">📊</div>
+              <div class="file-name">Q2_Operations_Report.xlsx</div>
+            </div>
+
+            <div class="explorer-file">
+              <div class="file-icon">📝</div>
+              <div class="file-name">Leave_Policy_2026.docx</div>
+            </div>
+          </div>
+
+          <div class="explorer-info-box">
+            This file explorer is part of the training VM. Suspicious filenames and unexpected executable files are included to simulate malware awareness scenarios.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKBAR -->
+    <div class="taskbar">
+      <div class="taskbar-left">
+        <button class="start-btn" type="button">⊞</button>
+
+        <button class="taskbar-app active-taskbar-app" data-app="jobmail" type="button">
+          <img src="image/logo1.png" alt="JobMail" />
+        </button>
+
+        <button class="taskbar-app" data-app="browser" type="button">
+          <span>🌐</span>
+        </button>
+
+        <button class="taskbar-app" data-app="explorer" type="button">
+          <span>📁</span>
+        </button>
+      </div>
+
+      <div class="taskbar-right">
+        <span id="taskbar-time">10:24 AM</span>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

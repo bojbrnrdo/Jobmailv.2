@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
+/* DESKTOP */
+.desktop {
+  padding: 30px;
+  display: flex;
+  gap: 30px;
+}
+
+/* APP ICON */
+.app-icon {
+  width: 90px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.app-icon img {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.app-icon span {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.app-icon:hover img {
+  transform: scale(1.1);
+}
