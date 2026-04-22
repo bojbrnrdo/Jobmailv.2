@@ -1303,10 +1303,4 @@ body {
     width: calc(100% - 130px);
   }
 }
-.phish-highlight {
-  background: rgba(239, 68, 68, 0.25);
-  color: #b91c1c;
-  font-weight: 700;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
+
