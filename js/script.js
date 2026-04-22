@@ -37,14 +37,12 @@ function openApp(appName) {
 
 function closeApp(windowId) {
   const target = document.getElementById(windowId);
-  if (!target) return;
-  target.classList.add("hidden");
+  if (target) target.classList.add("hidden");
 }
 
 function minimizeApp(windowId) {
   const target = document.getElementById(windowId);
-  if (!target) return;
-  target.classList.add("hidden");
+  if (target) target.classList.add("hidden");
 }
 
 function maximizeApp(windowId) {
@@ -55,9 +53,8 @@ function maximizeApp(windowId) {
 }
 
 let zCounter = 20;
-
 function bringToFront(winEl) {
-  zCounter += 1;
+  zCounter++;
   winEl.style.zIndex = zCounter;
 }
 
@@ -88,18 +85,18 @@ appWindows.forEach(win => {
 
 function updateTaskbarTime() {
   const now = new Date();
-  let hours = now.getHours();
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  const ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12 || 12;
-  taskbarTime.textContent = `${hours}:${minutes} ${ampm}`;
+  let h = now.getHours();
+  const m = String(now.getMinutes()).padStart(2, "0");
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  taskbarTime.textContent = `${h}:${m} ${ampm}`;
 }
-
 setInterval(updateTaskbarTime, 1000);
 updateTaskbarTime();
 
+
 // =======================================================
-// 🔥 HIGHLIGHT FUNCTION (ADDED)
+// 🔥 HIGHLIGHT FUNCTION
 // =======================================================
 function applyHighlights(email) {
   let content = email.body;
@@ -111,72 +108,51 @@ function applyHighlights(email) {
     const regex = new RegExp(escaped, "gi");
 
     content = content.replace(regex, match => {
-      return `<span class="phish-highlight" title="${h.reason}">${match}</span>`;
+      return `<span class="phish-highlight">${match}</span>`;
     });
   });
 
   return content;
 }
 
-// =======================================================
-// JOBMAIL SIMULATION (ORIGINAL + ENHANCED)
-// =======================================================
-const CONFIG = {
-  correctScore: 20,
-  wrongScore: -10
-};
 
+// =======================================================
+// JOBMAIL SYSTEM (UNCHANGED STRUCTURE)
+// =======================================================
 const EMAILS = [
-  // 🔥 KEEP ALL YOUR ORIGINAL EMAILS
-  // ADD highlights field like this:
-
   {
     id: 1,
     type: "phishing",
-    category: "Security",
     senderName: "SOC",
-    senderEmail: "soc@bountysecure-alerts.com",
+    senderEmail: "soc@fake-alerts.com",
     senderInitial: "S",
     tag: "Inbox",
-    subject: "Security Alert: Suspicious Login Attempt Detected",
-    preview: "We detected a suspicious login attempt on your account.",
+    subject: "Suspicious Login Attempt",
+    preview: "We detected suspicious activity.",
     time: "10:24 AM",
     body: `Dear Employee,
 
-We detected a suspicious login attempt on your account.
+We detected a suspicious login attempt.
 
 Location: Moscow, Russia
 
 <a href="#" class="fake-button">Secure My Account</a>
 `,
-    explanation: `This email is phishing.`,
     highlights: [
-      { text: "suspicious login attempt", reason: "Urgency / fear tactic" },
-      { text: "Moscow, Russia", reason: "Unusual login location" },
-      { text: "Secure My Account", reason: "Fake verification button" }
+      { text: "suspicious login attempt" },
+      { text: "Moscow, Russia" },
+      { text: "Secure My Account" }
     ]
   }
-
-  // 👉 Repeat for other emails
 ];
 
-// ================= ORIGINAL STATE =================
 let filteredEmails = [...EMAILS];
-let selectedEmailId = EMAILS[0]?.id || null;
-let score = 0;
-let mistakes = 0;
-let reviewedCount = 0;
+let selectedEmailId = EMAILS[0].id;
 
 const resolvedMap = {};
-const decisionMap = {};
+EMAILS.forEach(e => resolvedMap[e.id] = false);
 
-EMAILS.forEach(email => {
-  resolvedMap[email.id] = false;
-  decisionMap[email.id] = null;
-});
-
-// ================= ORIGINAL ELEMENTS =================
-const inboxList = document.getElementById("inbox-list");
+// ELEMENTS
 const subjectEl = document.getElementById("email-subject");
 const bodyEl = document.getElementById("email-body");
 const feedbackEl = document.getElementById("feedback");
@@ -185,71 +161,47 @@ const legitBtn = document.getElementById("btn-legit");
 const phishBtn = document.getElementById("btn-phish");
 const nextBtn = document.getElementById("btn-next");
 
+
 // =======================================================
-// 🔥 UPDATED VIEWER (ONLY CHANGE HERE)
+// 🔥 UPDATED VIEWER (NO BULLET EXPLANATION)
 // =======================================================
 function renderViewer() {
   const email = EMAILS.find(e => e.id === selectedEmailId);
 
-  if (!email) return;
-
   subjectEl.textContent = email.subject;
 
   if (resolvedMap[email.id]) {
-    bodyEl.innerHTML = applyHighlights(email); // 🔥 highlight AFTER decision
+    bodyEl.innerHTML = applyHighlights(email);
+
+    // 🔥 REMOVE BULLETS → SIMPLE FEEDBACK
+    feedbackEl.textContent = "Highlighted areas show why this email is suspicious.";
   } else {
     bodyEl.innerHTML = email.body;
-  }
-
-  if (resolvedMap[email.id]) {
-    feedbackEl.innerHTML = email.explanation;
-    nextBtn.disabled = false;
-  } else {
-    feedbackEl.textContent = "Decide whether this is legitimate or phishing.";
-    nextBtn.disabled = true;
+    feedbackEl.textContent = "Decide if this is legitimate or phishing.";
   }
 }
 
+
 // =======================================================
-// ORIGINAL LOGIC (UNCHANGED)
+// ACTIONS
 // =======================================================
 function handleDecision(choice) {
   const email = EMAILS.find(e => e.id === selectedEmailId);
-  if (!email || resolvedMap[email.id]) return;
+  if (resolvedMap[email.id]) return;
 
-  const correct =
-    (choice === "legit" && email.type === "legitimate") ||
-    (choice === "phish" && email.type === "phishing");
-
-  decisionMap[email.id] = choice;
   resolvedMap[email.id] = true;
-  reviewedCount++;
-
-  if (correct) score += CONFIG.correctScore;
-  else {
-    score += CONFIG.wrongScore;
-    mistakes++;
-  }
 
   renderViewer();
 }
 
 function goNext() {
-  const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
-  if (filteredEmails[idx + 1]) {
-    selectedEmailId = filteredEmails[idx + 1].id;
-  }
   renderViewer();
 }
 
-// =======================================================
-// EVENTS (UNCHANGED)
-// =======================================================
 legitBtn.addEventListener("click", () => handleDecision("legit"));
 phishBtn.addEventListener("click", () => handleDecision("phish"));
 nextBtn.addEventListener("click", goNext);
 
-// =======================================================
+
 // INIT
-// =======================================================
 renderViewer();
