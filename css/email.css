@@ -1303,4 +1303,102 @@ body {
     width: calc(100% - 130px);
   }
 }
+.phish-highlight {
+  background: rgba(239, 68, 68, 0.25);
+  color: #b91c1c;
+  font-weight: 700;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+/* =======================================================
+   🔥 UI FIX: COMPACT ACTION BAR (LEGIT + PHISH + NEXT)
+   ======================================================= */
 
+/* Make viewer layout flexible */
+.viewer-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Maximize email reading space */
+.viewer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 20px 6px;
+}
+
+/* Reduce spacing in email */
+.message-body {
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 6px 6px 12px 48px;
+}
+
+/* =======================================================
+   🔥 BUTTONS: INLINE + SMALL + CLEAN
+   ======================================================= */
+
+/* Combine panels visually */
+.decision-panel {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+}
+
+.viewer-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 14px;
+}
+
+/* Smaller buttons */
+.decision-btn {
+  height: 34px;
+  padding: 0 14px;
+  font-size: 12px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Next button match */
+.next-btn {
+  height: 34px;
+  padding: 0 16px;
+  font-size: 12px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Subtle elevation */
+.decision-btn,
+.next-btn {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* =======================================================
+   🔥 REMOVE BIG FEEDBACK BOX (NO SPACE WASTE)
+   ======================================================= */
+
+.feedback-panel {
+  display: none !important;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+/* =======================================================
+   🔥 HIGHLIGHT (KEEP YOUR TRAINING VISUAL)
+   ======================================================= */
+
+.phish-highlight {
+  background: rgba(239, 68, 68, 0.25);
+  color: #b91c1c;
+  font-weight: 700;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
