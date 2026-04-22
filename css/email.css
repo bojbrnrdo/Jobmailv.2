@@ -1304,15 +1304,9 @@ body {
   }
 }
 .phish-highlight {
-  background: rgba(239, 68, 68, 0.2);
-  color: #991b1b;
-  font-weight: 600;
+  background: rgba(239, 68, 68, 0.25);
+  color: #b91c1c;
+  font-weight: 700;
   padding: 2px 4px;
   border-radius: 4px;
-  border-bottom: 1px dashed #dc2626;
-  cursor: help;
-}
-
-.phish-highlight:hover {
-  background: rgba(239, 68, 68, 0.35);
 }
